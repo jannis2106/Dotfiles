@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 alias pac="sudo pacman"
 alias v="nvim"
 alias ddate="date +'%R - %a, %B %d, %Y'"
-alias ls="ls -al"
+alias ls="ls -al --color"
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 export LC_ALL=en_US.UTF-8
