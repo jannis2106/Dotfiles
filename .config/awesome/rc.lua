@@ -2,6 +2,14 @@
 	-- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 	pcall(require, "luarocks.loader")
 
+	-- widgets
+	local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+	local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+	local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+	local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+	local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+	local volume_control = require("volume-control")
+
 	-- Standard awesome library
 	local gears = require("gears")
 	local awful = require("awful")
@@ -109,6 +117,18 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+local cw = calendar_widget({
+    theme = "nord",
+    placement = "top_right",
+    start_sunday = false,
+    radius = 5,
+})
+
+mytextclock:connect_signal("button::press",
+    function(_, _, _, button)
+        if button == 1 then cw.toggle() end
+    end)
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -164,6 +184,8 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+volumecfg = volume_control({device="pulse"})
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -217,9 +239,34 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            spacing = 3,
+	    mykeyboardlayout,
             wibox.widget.systray(),
-            mytextclock,
+	    cpu_widget({
+		width = 50,
+		step_width = 2,
+		step_spacing = 0,
+		color = beautiful.border_focus,
+	    }),
+	    ram_widget({
+		color_used = beautiful.bg_normal,
+		color_free = beautiful.fg_normal,
+		color_buf = beautiful.bg_normal,
+		widget_width = 25,
+		widget_height = 25,
+	    }),
+	    volumecfg.widget,
+	    batteryarc_widget({
+	    }),
+            brightness_widget{
+		program = "brightnessctl",
+		type = "arc",
+		step = 2,
+		percentage = true,
+		base = 33,
+		timeout = 100,
+	    },
+	    mytextclock,
             -- s.mylayoutbox,
         },
     }
@@ -333,7 +380,24 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    
+    -- Brightness (somehow the icons on the keyboard are switched)
+    awful.key({ }, "XF86MonBrightnessDown", function () brightness_widget:inc() end, 
+    	{description = "increase brightness", group = "widgets"}),
+
+    awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:dec() end, 
+    	{description = "decrease brightness", group = "widgets"}),
+
+    -- Volume
+    awful.key({ }, "XF86AudioRaiseVolume", function () volumecfg:up() end,
+    	{description = "increase volume", group = "widgets"}),
+
+    awful.key({ }, "XF86AudioLowerVolume", function () volumecfg:down() end,
+    	{description = "decrease volume", group = "widgets"}),
+
+    awful.key({ }, "XF86AudioMute", function () volumecfg:toggle() end,
+    	{description = "toggle volume", group = "widgets"})
 )
 
 clientkeys = gears.table.join(
@@ -578,3 +642,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- awful.spawn.once("nm-applet")
 -- awful.spawn.once("volumeicon")
 awful.spawn.with_shell("picom")
+awful.spawn.with_shell("pulseaudio")

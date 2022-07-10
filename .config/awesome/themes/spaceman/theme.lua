@@ -9,14 +9,14 @@ local theme = {}
 
 local bgColor 		= "#191919"	-- dark gray
 local pink	 	= "#D7859C"
-local darkBlue		= "#FF4C35"	
-local lightBlue		= "#3788A5"
+local orange		= "#FF4C35"	
+local lightBlue		= "#106381"
 
 theme.font		= "mononoki"
 
 theme.bg_normal		= bgColor
-theme.bg_focus		= darkBlue
-theme.bg_urgent		= "#FF0000"
+theme.bg_focus		= orange
+theme.bg_urgent		= lightBlue
 theme.bg_minimize	= "#444444"
 theme.bg_systray	= bgColor
 
