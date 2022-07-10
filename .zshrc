@@ -83,6 +83,9 @@ alias yaysua="yay -Sua --noconfirs" 	# synchronize and update AUR packages
 # vim
 alias v="nvim"
 
+# clear
+alias c="clear"
+
 # formatted date
 alias ddate="date +'%R - %a, %B %d, %Y'"
 
