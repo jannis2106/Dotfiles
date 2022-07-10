@@ -78,7 +78,7 @@ alias lt="exa -aT --group-directories-first --icons"
 # pacman / yay
 alias pac="sudo pacman"
 alias pacsyu="sudo pacman -Syu"		# update package list and upgrade all packages afterwards
-alias yaysua="yay -Sua --noconfirs" 	# synchronize and update AUR packages
+alias yaysua="yay -Sua --noconfirm" 	# synchronize and update AUR packages
 
 # vim
 alias v="nvim"
