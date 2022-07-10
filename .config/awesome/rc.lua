@@ -246,7 +246,7 @@ awful.screen.connect_for_each_screen(function(s)
 		width = 50,
 		step_width = 2,
 		step_spacing = 0,
-		color = beautiful.border_focus,
+		color = beautiful.bg_focus,
 	    }),
 	    ram_widget({
 		color_used = beautiful.bg_normal,
