@@ -10,18 +10,17 @@ local theme = {}
 local bgColor 		= "#191919"	-- dark gray
 local pink	 	= "#D7859C"
 local orange		= "#FF4C35"	
-local lightBlue		= "#3788A5"
 
 theme.font		= "mononoki"
 
 theme.bg_normal		= bgColor
-theme.bg_focus		= lightBlue
-theme.bg_urgent		= lightBlue
+theme.bg_focus		= pink
+theme.bg_urgent		= pink
 theme.bg_minimize	= "#444444"
 theme.bg_systray	= bgColor
 
 theme.fg_normal		= "#AAAAAA"
-theme.fg_focus		= "#FFFFFF"
+theme.fg_focus		= bgColor
 theme.fg_urgent		= "#FFFFFF"
 theme.fg_minimize	= "#FFFFFF"
 
@@ -30,7 +29,7 @@ theme.gap_single_client	= true
 theme.border_width	= dpi(2)
 theme.border_normal	= "#000000"
 theme.border_focus	= pink
-theme.border_marked	= lightBlue
+theme.border_marked	= pink
 
 theme.wallpaper		= "/usr/share/pixmaps/spaceman.jpeg"
 theme.icon_theme	= nil
