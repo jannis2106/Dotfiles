@@ -91,3 +91,7 @@ alias ddate="date +'%R - %a, %B %d, %Y'"
 
 # bare git repo for dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias cadd="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME add"
+alias ccommit="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME commit -m"
+alias cpush="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME push"
+alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
