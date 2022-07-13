@@ -8,10 +8,10 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 local bgColor 		= "#191919"	-- dark gray
-local pink	 	= "#D7859C"
+local pink	 	    = "#D7859C"
 local orange		= "#FF4C35"	
 
-theme.font		= "mononoki"
+theme.font		    = "mononoki"
 
 theme.bg_normal		= bgColor
 theme.bg_focus		= pink
