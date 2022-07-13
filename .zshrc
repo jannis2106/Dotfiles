@@ -95,4 +95,7 @@ alias cadd="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME add"
 alias ccommit="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME commit -m"
 alias cpush="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME push"
 alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
+
+# spicetify
 export PATH=$PATH:/home/jannis/.spicetify
+alias spicetify="~/.spicetify/spicetify"
