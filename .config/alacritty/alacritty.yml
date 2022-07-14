@@ -333,7 +333,7 @@ schemes:
       background: '#D7859C'
     normal:
       black:   '#1d1d21'
-      red:     '#FF6188'
+      red:     '#f54e52'
       green:   '#A9DC76'
       yellow:  '#FFD866'
       blue:    '#A7C8FC'
@@ -344,7 +344,7 @@ schemes:
     # Bright colors
     bright:
       black:   '#666666'
-      red:     '#ff7a9c'
+      red:     '#f77269'
       green:   '#b5e189'
       yellow:  '#FFDF80'
       blue:    '#B5D0FC'
