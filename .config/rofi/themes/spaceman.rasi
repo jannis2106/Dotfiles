@@ -1,0 +1,57 @@
+* {
+    background-color:           #191919;
+    border-color:               #191919;
+    text-color:                 #dddddd;
+    height:                     30px;
+    font:                       "Mononoki Nerd Font Mono 11";
+    prompt-font:                "Mononoki Nerd Font Mono 11";
+    prompt-background:          #a7c8fc;
+    prompt-foreground:          #191919;
+    selected-normal-background: #f54e52;
+    selected-normal-foreground: #ffffff;
+}
+
+#window {
+    anchor: north;
+    location: north;
+    width: 100%;
+    padding: 0px;
+    children: [ horibox ];
+}
+
+#horibox {
+    orientation: horizontal;
+    children: [ prompt, entry, listview ];
+}
+
+#prompt {
+    padding:          7px;
+    background-color: @prompt-background;
+    text-color:       @prompt-foreground;
+    font:             @prompt-font;
+}
+
+#listview {
+    layout: horizontal;
+    lines: 100;
+}
+
+#entry {
+    padding: 6px;
+    expand: false;
+    width: 10em; 
+}
+
+#element {
+    padding: 6px;
+}
+
+#element selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
