@@ -387,7 +387,7 @@ schemes:
       text: '#191919'
       background: '#D7859C'
     normal:
-      black:   '#191919'
+      black:   '#262626'
       red:     '#e95678'
       green:   '#29d398'
       yellow:  '#fab795'
@@ -398,7 +398,7 @@ schemes:
 
     # Bright colors
     bright:
-      black:   '#262626'
+      black:   '#383838'
       red:     '#ec6a88'
       green:   '#3fdaa4'
       yellow:  '#fbc3a7'
