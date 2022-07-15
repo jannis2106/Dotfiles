@@ -491,7 +491,12 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute", function ()  
         os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel)) 
         volume.update()
-    end, {description = "toggle volume", group = "widgets"})
+    end, {description = "toggle volume", group = "widgets"}),
+
+    -- Screenshot
+    awful.key({}, "Print", function()
+        awful.util.spawn("flameshot full -p /home/jannis/Pictures/screenshots")
+    end, {description = "take screenshot", group = "screen"})
 )
 
 clientkeys = gears.table.join(
