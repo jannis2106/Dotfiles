@@ -202,7 +202,7 @@ local cpuIcon = makeFaIcon('\u{f85a}', "#e95678")
 local cpu = lain.widget.cpu {
     timeout = 1,
     settings = function()
-        widget:set_markup(markup.fg.color("#e95678", cpu_now.usage .. "%"))
+        widget:set_markup(markup.fg.color("#e95678", "cpu: " .. cpu_now.usage .. "%"))
     end
 }
 
@@ -210,7 +210,7 @@ local memIcon = makeFaIcon('\u{f2db}', "#fab795")
 local mem = lain.widget.mem {
     timeout = 1,
     settings = function() 
-        widget:set_markup(markup.fg.color("#fab795", mem_now.used .. "MiB (" .. mem_now.perc .. "%)"))
+        widget:set_markup(markup.fg.color("#fab795", "mem: " .. mem_now.perc .. "% (" .. mem_now.used .. "MiB)"))
     end
 }
 
@@ -266,6 +266,14 @@ local weather = lain.widget.weather {
     end,
     showpopup = "off",
 }
+
+local clockIcon = makeFaIcon('\u{f133}', "#ffffff")
+local clock = awful.widget.watch(
+    "date +'%R - %a, %B %d, %Y'", 1,
+    function(widget, stdout)
+        widget:set_markup(markup.fg.color("#ffffff", stdout))
+    end
+)
 
 local separator = wibox.widget {
     markup = '  |',
@@ -341,8 +349,9 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget { volumeIcon, volume.widget, layout = wibox.layout.align.horizontal },
 	        separator, 
 	        wibox.widget { weatherIcon, weather.widget, layout = wibox.layout.align.horizontal },
-	        separator, 
-            mytextclock,
+	        separator,
+            wibox.widget { clockIcon, clock, layout = wibox.layout.align.horizontal },
+            -- mytextclock,
             wibox.widget.systray(),
             -- s.mylayoutbox,
         },
