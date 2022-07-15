@@ -34,7 +34,6 @@ theme.wallpaper		= "/usr/share/pixmaps/spaceman.jpeg"
 theme.icon_theme	= nil
 
 theme.icon_size     = 16
-theme.icon_font     = "Mononoki Nerd Font " -- attention to space at the end!
 theme.icon_color    = theme.fg_normal
 
 return theme

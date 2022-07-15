@@ -2,14 +2,6 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 	pcall(require, "luarocks.loader")
 
-	-- widgets
-	local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-	local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-	local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
-	local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-	local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-	local volume_control = require("volume-control")
-
 	-- Standard awesome library
 	local gears = require("gears")
 	local awful = require("awful")
@@ -25,6 +17,13 @@
 	-- Enable hotkeys help widget for VIM and other apps
 	-- when client with a matching name is opened:
 	require("awful.hotkeys_popup.keys")
+
+
+    -- lain
+    local lain = require("lain")
+
+    -- secrets
+    local secrets = require("secrets")
 
 	-- {{{ Error handling
 	-- Check if awesome encountered an error during startup and fell back to
@@ -117,18 +116,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
-local cw = calendar_widget({
-    theme = "nord",
-    placement = "top_right",
-    start_sunday = false,
-    radius = 5,
-})
-
-mytextclock:connect_signal("button::press",
-    function(_, _, _, button)
-        if button == 1 then cw.toggle() end
-    end)
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -184,7 +171,105 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
-volumecfg = volume_control({device="pulse"})
+-- FontAwesome Icons
+local function makeFaIcon( code, color )
+  return wibox.widget{
+    font = "Mononoki Nerd Font ",
+    markup = ' <span color="'.. color ..'">' .. code .. '</span> ',
+    -- align  = 'center',
+    -- valign = 'center',
+    widget = wibox.widget.textbox
+  }
+end
+
+-- Lain Widgets
+
+local markup = lain.util.markup
+
+local batIcon = makeFaIcon('\u{f578}', "#29d389")
+local bat = lain.widget.bat {
+    battery = "BAT1",
+    settings = function()
+        widget:set_markup(markup.fg.color("#29d389", bat_now.perc .. "%"))
+    end,
+    
+}
+
+local cpuIcon = makeFaIcon('\u{f85a}', "#e95678")
+local cpu = lain.widget.cpu {
+    timeout = 1,
+    settings = function()
+        widget:set_markup(markup.fg.color("#e95678", cpu_now.usage .. "%"))
+    end
+}
+
+local memIcon = makeFaIcon('\u{f2db}', "#fab795")
+local mem = lain.widget.mem {
+    timeout = 1,
+    settings = function() 
+        widget:set_markup(markup.fg.color("#fab795", mem_now.used .. "MiB (" .. mem_now.perc .. "%)"))
+    end
+}
+
+local netIcon = makeFaIcon('\u{f1eb}', "#26bbd9")
+local net = lain.widget.net {
+    settings = function()
+       widget:set_markup(markup.fg.color("#26bbd9", " " .. net_now.received .. " ↓↑ " .. net_now.sent))
+    end
+}
+
+local volumeIcon = makeFaIcon('\u{fa7d}', "#ee64ac")
+
+local volume = lain.widget.alsa {
+    timeout = 1,
+
+    settings = function()
+        vlevel = volume_now.level .. "%"
+        
+        if volume_now.status == "off" then
+            vlevel = vlevel .. " M"
+        end
+
+        widget:set_markup(markup.fg.color("#ee64ac", vlevel))
+    end
+
+}
+
+local cal = lain.widget.cal {
+    attach_to = {
+        mytextclock
+    },
+    week_number = "left",
+    notification_preset = {
+        font = "Mononoki",
+        fg = "#dddddd",
+        bg = "#191919",
+    }
+}
+mytextclock:connect_signal("button::press",
+    function(_, _, _, button)
+        if button == 1 then cal.show(7) end
+    end
+)
+
+local weatherIcon = makeFaIcon('\u{e30d}', "#59e1e3")
+local weather = lain.widget.weather {
+    APPID = secrets.APPID,
+    city_id = secrets.city_id,
+    settings = function()
+        descr = weather_now["weather"][1]["description"]:lower()
+        units = math.floor(weather_now["main"]["temp"])
+        widget:set_markup(markup.fg.color("#59e1e3", " " .. descr .. " @ " .. units .. "°C"))
+    end,
+    showpopup = "off",
+}
+
+local separator = wibox.widget {
+    markup = '  |',
+    align = 'center',
+    valign = 'center',
+    widget = wibox.widget.textbox,
+}
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -240,34 +325,22 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            spacing = 3,
-	    mykeyboardlayout,
+            spacing = 0,
+    	    -- mykeyboardlayout,
+            wibox.widget { cpuIcon, cpu.widget, layout = wibox.layout.align.horizontal },
+	        separator, 
+            wibox.widget { memIcon, mem.widget, layout = wibox.layout.align.horizontal },
+            separator,
+            wibox.widget { netIcon, net.widget, layout = wibox.layout.align.horizontal },
+	        separator, 
+            wibox.widget { batIcon, bat.widget, layout = wibox.layout.align.horizontal },
+	        separator, 
+            wibox.widget { volumeIcon, volume.widget, layout = wibox.layout.align.horizontal },
+	        separator, 
+	        wibox.widget { weatherIcon, weather.widget, layout = wibox.layout.align.horizontal },
+	        separator, 
+            mytextclock,
             wibox.widget.systray(),
-	    cpu_widget({
-		width = 50,
-		step_width = 2,
-		step_spacing = 0,
-		color = beautiful.bg_focus,
-	    }),
-	    ram_widget({
-		color_used = beautiful.bg_normal,
-		color_free = beautiful.fg_normal,
-		color_buf = beautiful.bg_normal,
-		widget_width = 25,
-		widget_height = 25,
-	    }),
-	    volumecfg.widget,
-	    batteryarc_widget({
-	    }),
-            brightness_widget{
-		program = "brightnessctl",
-		type = "arc",
-		step = 2,
-		percentage = true,
-		base = 33,
-		timeout = 100,
-	    },
-	    mytextclock,
             -- s.mylayoutbox,
         },
     }
@@ -386,21 +459,27 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
     
     -- Brightness (somehow the icons on the keyboard are switched)
-    awful.key({ }, "XF86MonBrightnessDown", function () brightness_widget:inc() end, 
-    	{description = "increase brightness", group = "widgets"}),
+    -- awful.key({ }, "XF86MonBrightnessDown", function () brightness_widget:inc() end, 
+    --	{description = "increase brightness", group = "widgets"}),
 
-    awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:dec() end, 
-    	{description = "decrease brightness", group = "widgets"}),
+    --awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:dec() end, 
+    --	{description = "decrease brightness", group = "widgets"}),
 
     -- Volume
-    awful.key({ }, "XF86AudioRaiseVolume", function () volumecfg:up() end,
-    	{description = "increase volume", group = "widgets"}),
+    awful.key({ }, "XF86AudioRaiseVolume", function () 
+        os.execute(string.format("amixer set %s 1%%+", volume.channel)) 
+        volume.update()
+    end, {description = "increase volume", group = "widgets"}),
 
-    awful.key({ }, "XF86AudioLowerVolume", function () volumecfg:down() end,
-    	{description = "decrease volume", group = "widgets"}),
+    awful.key({ }, "XF86AudioLowerVolume", function () 
+        os.execute(string.format("amixer set %s 1%%-", volume.channel)) 
+        volume.update()
+    end, {description = "decrease volume", group = "widgets"}),
 
-    awful.key({ }, "XF86AudioMute", function () volumecfg:toggle() end,
-    	{description = "toggle volume", group = "widgets"})
+    awful.key({ }, "XF86AudioMute", function ()  
+        os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel)) 
+        volume.update()
+    end, {description = "toggle volume", group = "widgets"})
 )
 
 clientkeys = gears.table.join(
