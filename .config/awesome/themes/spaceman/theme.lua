@@ -8,14 +8,13 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 local bgColor 		= "#191919"	-- dark gray
-local pink	 	    = "#D7859C"
-local orange		= "#FF4C35"	
+local accent 	    = "#e95678"
 
 theme.font		    = "mononoki"
 
 theme.bg_normal		= bgColor
-theme.bg_focus		= pink
-theme.bg_urgent		= pink
+theme.bg_focus		= accent
+theme.bg_urgent		= accent
 theme.bg_minimize	= "#444444"
 theme.bg_systray	= bgColor
 
@@ -28,10 +27,14 @@ theme.useless_gap	= dpi(7)
 theme.gap_single_client	= true
 theme.border_width	= dpi(2)
 theme.border_normal	= "#000000"
-theme.border_focus	= pink
-theme.border_marked	= pink
+theme.border_focus	= accent
+theme.border_marked	= accent
 
 theme.wallpaper		= "/usr/share/pixmaps/spaceman.jpeg"
 theme.icon_theme	= nil
+
+theme.icon_size     = 16
+theme.icon_font     = "Mononoki Nerd Font " -- attention to space at the end!
+theme.icon_color    = theme.fg_normal
 
 return theme

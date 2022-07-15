@@ -298,7 +298,7 @@ schemes:
       cyan:    '#5b7d78'
       white:   '#828482'
 
-  Spaceman: &Spaceman
+  Custom1: &Custom1
     primary:
       background: '#191919'
       foreground: '#c5c8c6'
@@ -351,6 +351,62 @@ schemes:
       magenta: '#BDB2F5'
       cyan:    '#8EE2EC'
       white:   '#FFFFFF'
+
+
+  Spaceman: &Spaceman
+    primary:
+      background: '#191919'
+      foreground: '#f2f2f2'
+    cursor:
+      text: CellBackground
+      cursor: CellForeground
+    vi_mode_cursor:
+      text: CellBackground
+      cursor: CellForeground
+    search:
+      matches:
+        foreground: '#191919'
+        background: '#29d398'
+      focused_match:
+        foreground: '#191919'
+        background: '#59e1e3'
+      bar:
+        background: '#191919'
+        foreground: '#f2f2f2'
+    hints:
+      start:
+        foreground: '#191919'
+        background: '#fab795'
+      end:
+        foreground: '#fab795'
+        background: '#191919'
+    line_indicator:
+      foreground: None
+      background: None
+    selection:
+      text: '#191919'
+      background: '#D7859C'
+    normal:
+      black:   '#191919'
+      red:     '#e95678'
+      green:   '#29d398'
+      yellow:  '#fab795'
+      blue:    '#26bbd9'
+      magenta: '#ee64ac'
+      cyan:    '#59e1e3'
+      white:   '#f2f2f2'
+
+    # Bright colors
+    bright:
+      black:   '#262626'
+      red:     '#ec6a88'
+      green:   '#3fdaa4'
+      yellow:  '#fbc3a7'
+      blue:    '#3fc7de'
+      magenta: '#f075b5'
+      cyan:    '#6be4e6'
+      white:   '#FFFFFF'
+
 
 
 

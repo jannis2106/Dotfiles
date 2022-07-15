@@ -1,14 +1,14 @@
 * {
     background-color:            #191919;
     border-color:                #191919;
-    text-color:                  #dddddd;
+    text-color:                  #f2f2f2;
     font:                        "Mononoki Nerd Font Mono 12";
     prompt-font:                 "Mononoki Nerd Font Mono 12";
-    prompt-background:           #a7c8fc;
+    prompt-background:           #3fc7de;
     prompt-foreground:           #191919;
     prompt-padding:              5px;
-    selected-normal-background:  #f54e52;
-    selected-normal-foreground:  #ffffff;
+    selected-normal-background:  #e95678;
+    selected-normal-foreground:  #191919;
     spacing:                     5;
 }
 
