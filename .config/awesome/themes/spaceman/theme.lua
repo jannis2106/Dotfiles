@@ -12,35 +12,44 @@ end
 
 local theme = {}
 
-local bgColor 		= "#191919"	-- dark gray
-local accent 	    = "#e95678" -- red
+local bgColor 		        = "#191919"	-- dark gray
+local accent 	            = "#e95678" -- red
 
-theme.font		    = "mononoki"
+theme.font		            = "mononoki"
 
-theme.bg_normal		= bgColor
-theme.bg_focus		= accent
-theme.bg_urgent		= accent
-theme.bg_minimize	= "#444444"
-theme.bg_systray	= bgColor
+theme.bg_normal		        = bgColor
+theme.bg_focus		        = accent
+theme.bg_urgent		        = accent
+theme.bg_minimize	        = "#444444"
+theme.bg_systray	        = bgColor
 
-theme.fg_normal		= "#AAAAAA"
-theme.fg_focus		= bgColor
-theme.fg_urgent		= "#FFFFFF"
-theme.fg_minimize	= "#FFFFFF"
+theme.fg_normal		        = "#AAAAAA"
+theme.fg_focus		        = bgColor
+theme.fg_urgent		        = "#FFFFFF"
+theme.fg_minimize	        = "#FFFFFF"
 
-theme.useless_gap	= dpi(7)
-theme.gap_single_client	= true
-theme.border_width	= dpi(2)
-theme.border_normal	= "#000000"
-theme.border_focus	= accent
-theme.border_marked	= accent
+theme.useless_gap	        = dpi(7)
+theme.gap_single_client	    = true
+theme.border_width	        = dpi(2)
+theme.border_normal	        = "#000000"
+theme.border_focus	        = accent
+theme.border_marked	        = accent
 
-theme.taglist_shape = taglistShape 
+theme.taglist_shape         = taglistShape 
+theme.taglist_spacing       = 5
 
-theme.wallpaper		= "/usr/share/pixmaps/spaceman.jpeg"
-theme.icon_theme	= nil
+theme.wallpaper		        = "/usr/share/pixmaps/spaceman.jpeg"
+theme.icon_theme	        = nil
 
-theme.icon_size     = 16
-theme.icon_color    = theme.fg_normal
+theme.icon_size             = 16
+theme.icon_color            = theme.fg_normal
+
+theme.hotkeys_bg            = bgColor
+-- theme.hotkeys_fg            = theme.accent
+theme.hotkeys_fg            = theme.fg_normal
+theme.hotkeys_border_width  = theme.border_width
+theme.hotkeys_border_color  = theme.border_focus
+theme.hotkeys_shape         = taglistShape
+
 
 return theme
