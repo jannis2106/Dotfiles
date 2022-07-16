@@ -1,0 +1,5 @@
+
+! COLORS FOR SXIV
+Sxiv.foreground:   #f2f2f2
+Sxiv.background:   #191919
+Sxiv.font: Mononoki:style=bold:size=11
