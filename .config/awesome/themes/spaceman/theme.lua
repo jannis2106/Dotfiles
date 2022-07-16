@@ -51,5 +51,30 @@ theme.hotkeys_border_width  = theme.border_width
 theme.hotkeys_border_color  = theme.border_focus
 theme.hotkeys_shape         = taglistShape
 
+theme.icons                 = os.getenv("HOME") .. "/.config/awesome/themes/spaceman/icons/"
+theme.layout_cornernw       = theme.icons .. "cornernw.png"
+theme.layout_cornerne       = theme.icons .. "cornerne.png"
+theme.layout_cornersw       = theme.icons .. "cornersw.png"
+theme.layout_cornerse       = theme.icons .. "cornerse.png"
+theme.layout_fairh          = theme.icons .. "fairh.png"
+theme.layout_fairv          = theme.icons .. "fairv.png"
+theme.layout_floating       = theme.icons .. "floating.png"
+theme.layout_magnifier      = theme.icons .. "magnifier.png"
+theme.layout_max            = theme.icons .. "max.png"
+theme.layout_fullscreen     = theme.icons .. "fullscreen.png"
+theme.layout_spiral         = theme.icons .. "spiral.png"
+theme.layout_dwindle        = theme.icons .. "dwindle.png"
+theme.layout_tile           = theme.icons .. "tile.png"
+theme.layout_tiletop        = theme.icons .. "tiletop.png"
+theme.layout_tilebottom     = theme.icons .. "tilebottom.png"
+theme.layout_tileleft       = theme.icons .. "tileleft.png"
+
+theme.lain_icons            = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
+theme.layout_termfair       = theme.icons .. "termfair.png"
+theme.layout_centerfair     = theme.icons .. "centerfair.png"
+theme.layout_cascade        = theme.icons .. "cascade.png"
+theme.layout_cascadetile    = theme.icons .. "cascadetile.png"
+theme.layout_centerwork     = theme.icons .. "centerwork.png"
+theme.layout_centerworkh    = theme.icons .. "centerworkh.png"
 
 return theme
