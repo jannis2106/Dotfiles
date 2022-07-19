@@ -7,9 +7,11 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
 local taglistShape = function(cr, width, height)
-    shape.transform(shape.rounded_rect) : translate(0, 25) (cr, width, 5, 4)
-    -- shape.rounded_rect(cr, width, 5, 4)
+    shape.transform(shape.rounded_rect) : translate(0, 25) (cr, width, height, 4)
+end
 
+local hotkeysShape = function(cr, width, height)
+    shape.rounded_rect(cr, width, height, 4)
 end
 
 local theme = {}
@@ -20,13 +22,13 @@ local accent 	            = "#e95678" -- red
 theme.font		            = "Mononoki"
 
 theme.bg_normal		        = bgColor
-theme.bg_focus		        = accent
+theme.bg_focus		        = "#59e1e3"
 theme.bg_urgent		        = accent
 theme.bg_minimize	        = "#444444"
 theme.bg_systray	        = bgColor
 
 theme.fg_normal		        = "#AAAAAA"
-theme.fg_focus		        = "#AAAAAA"
+theme.fg_focus		        = "#FFFFFF"
 theme.fg_urgent		        = "#FFFFFF"
 theme.fg_minimize	        = "#FFFFFF"
 
@@ -37,7 +39,7 @@ theme.border_normal	        = "#000000"
 theme.border_focus	        = accent
 theme.border_marked	        = accent
 
-theme.taglist_shape         = taglistShape 
+theme.taglist_shape         = taglistShape
 theme.taglist_spacing       = 5
 
 theme.wallpaper		        = "/usr/share/pixmaps/spaceman.jpeg"
@@ -51,7 +53,7 @@ theme.hotkeys_bg            = bgColor
 theme.hotkeys_fg            = theme.fg_normal
 theme.hotkeys_border_width  = theme.border_width
 theme.hotkeys_border_color  = theme.border_focus
-theme.hotkeys_shape         = taglistShape
+theme.hotkeys_shape         = hotkeysShape
 
 theme.icons                 = os.getenv("HOME") .. "/.config/awesome/themes/spaceman/icons/"
 theme.layout_cornernw       = theme.icons .. "cornernw.png"
