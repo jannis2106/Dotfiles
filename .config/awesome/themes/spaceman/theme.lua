@@ -1,13 +1,15 @@
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local gears_shape = require("gears.shape")
+local shape = require("gears.shape")
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
 local taglistShape = function(cr, width, height)
-    gears_shape.rounded_rect(cr, width, height, 4)
+    shape.transform(shape.rounded_rect) : translate(0, 25) (cr, width, 5, 4)
+    -- shape.rounded_rect(cr, width, 5, 4)
+
 end
 
 local theme = {}
@@ -15,7 +17,7 @@ local theme = {}
 local bgColor 		        = "#191919"	-- dark gray
 local accent 	            = "#e95678" -- red
 
-theme.font		            = "mononoki"
+theme.font		            = "Mononoki"
 
 theme.bg_normal		        = bgColor
 theme.bg_focus		        = accent
@@ -24,7 +26,7 @@ theme.bg_minimize	        = "#444444"
 theme.bg_systray	        = bgColor
 
 theme.fg_normal		        = "#AAAAAA"
-theme.fg_focus		        = bgColor
+theme.fg_focus		        = "#AAAAAA"
 theme.fg_urgent		        = "#FFFFFF"
 theme.fg_minimize	        = "#FFFFFF"
 
