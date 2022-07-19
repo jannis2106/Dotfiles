@@ -385,7 +385,7 @@ schemes:
       background: None
     selection:
       text: '#191919'
-      background: '#D7859C'
+      background: '#e95678'
     normal:
       black:   '#262626'
       red:     '#e95678'
