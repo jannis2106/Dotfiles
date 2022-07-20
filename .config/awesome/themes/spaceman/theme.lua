@@ -42,7 +42,7 @@ theme.border_marked	        = accent
 theme.taglist_shape         = taglistShape
 theme.taglist_spacing       = 5
 
-theme.wallpaper		        = "/usr/share/pixmaps/spaceman.jpeg"
+theme.wallpaper		        = "~/Pictures/wallpaper/spaceman.jpeg"
 theme.icon_theme	        = nil
 
 theme.icon_size             = 16
