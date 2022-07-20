@@ -177,39 +177,69 @@ end
 -- Lain Widgets
 local markup = lain.util.markup
 
-local batIcon = makeFaIcon('\u{f578}', "#29d389")
+local colors = {
+    "#e95678",
+    "#29d389",
+    "#fab795",
+    "#26bbd9",
+    "#ee64ac",
+    "#59e1e3",
+}
+
+-- randomize colors
+math.randomseed(os.clock()*100000000000)
+function shuffle(tbl)
+  for i = #tbl, 2, -1 do
+    local j = math.random(i)
+    tbl[i], tbl[j] = tbl[j], tbl[i]
+  end
+  return tbl
+end
+
+shuffle(colors)
+
+local wicolors = {
+    bat = colors[1],
+    cpu = colors[2],
+    mem = colors[3],
+    net = colors[4],
+    volume = colors[5],
+    weather = colors[6]
+}
+
+local batIcon = makeFaIcon('\u{f578}', wicolors.bat)
 local bat = lain.widget.bat {
     battery = "BAT1",
     settings = function()
-        widget:set_markup(markup.fg.color("#29d389", bat_now.perc .. "%"))
+        widget:set_markup(markup.fg.color(wicolors.bat, bat_now.perc .. "%"))
     end,
     
 }
 
-local cpuIcon = makeFaIcon('\u{f85a}', "#e95678")
+local cpuIcon = makeFaIcon('\u{f85a}', wicolors.cpu)
 local cpu = lain.widget.cpu {
     timeout = 1,
     settings = function()
-        widget:set_markup(markup.fg.color("#e95678", "cpu: " .. cpu_now.usage .. "%"))
+        widget:set_markup(markup.fg.color(wicolors.cpu, "cpu: " .. cpu_now.usage .. "%"))
     end
 }
 
-local memIcon = makeFaIcon('\u{f2db}', "#fab795")
+local memIcon = makeFaIcon('\u{f2db}', wicolors.mem)
 local mem = lain.widget.mem {
     timeout = 1,
     settings = function() 
-        widget:set_markup(markup.fg.color("#fab795", "mem: " .. mem_now.perc .. "% (" .. mem_now.used .. "MiB)"))
+        widget:set_markup(markup.fg.color(wicolors.mem, "mem: " .. mem_now.perc .. "% (" .. mem_now.used .. "MiB)"))
     end
 }
 
-local netIcon = makeFaIcon('\u{f1eb}', "#26bbd9")
+local netIcon = makeFaIcon('\u{f1eb}', wicolors.net)
 local net = lain.widget.net {
     settings = function()
-       widget:set_markup(markup.fg.color("#26bbd9", " " .. net_now.received .. " ↓↑ " .. net_now.sent))
+       widget:set_markup(markup.fg.color(wicolors.net, " " .. net_now.received .. " ↓↑ " .. net_now.sent))
     end
 }
 
-local volumeIcon = makeFaIcon('\u{fa7d}', "#ee64ac")
+local volumeIcon = makeFaIcon('\u{fa7d}', wicolors.volume)
 
 local volume = lain.widget.alsa {
     timeout = 1,
@@ -221,7 +251,7 @@ local volume = lain.widget.alsa {
             vlevel = vlevel .. " M"
         end
 
-        widget:set_markup(markup.fg.color("#ee64ac", vlevel))
+        widget:set_markup(markup.fg.color(wicolors.volume, vlevel))
     end
 
 }
@@ -243,14 +273,14 @@ mytextclock:connect_signal("button::press",
     end
 )
 
-local weatherIcon = makeFaIcon('\u{e30d}', "#59e1e3")
+local weatherIcon = makeFaIcon('\u{e30d}', wicolors.weather)
 local weather = lain.widget.weather {
     APPID = secrets.APPID,
     city_id = secrets.city_id,
     settings = function()
         descr = weather_now["weather"][1]["description"]:lower()
         units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fg.color("#59e1e3", " " .. descr .. " @ " .. units .. "°C"))
+        widget:set_markup(markup.fg.color(wicolors.weather, " " .. descr .. " @ " .. units .. "°C"))
     end,
     showpopup = "off",
 }
@@ -292,7 +322,7 @@ awful.screen.connect_for_each_screen(function(s)
         awful.button({ }, 4, function () awful.layout.inc( 1) end),
         awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     
-        -- Create a taglist widget
+    -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
@@ -329,7 +359,7 @@ awful.screen.connect_for_each_screen(function(s)
             spacing = 0,
     	    -- mykeyboardlayout,
             wibox.widget { cpuIcon, cpu.widget, layout = wibox.layout.align.horizontal },
-	        separator, 
+	        separator,
             wibox.widget { memIcon, mem.widget, layout = wibox.layout.align.horizontal },
             separator,
             wibox.widget { netIcon, net.widget, layout = wibox.layout.align.horizontal },
@@ -342,8 +372,9 @@ awful.screen.connect_for_each_screen(function(s)
 	        separator,
             wibox.widget { clockIcon, clock, layout = wibox.layout.align.horizontal },
             -- mytextclock,
-            wibox.widget.systray(),
-            -- s.mylayoutbox,
+            -- wibox.widget.systray(),
+            wibox.widget { markup = '  ', align = 'center', valign = 'center', widget = wibox.widget.textbox },
+            s.mylayoutbox,
         },
     }
 end)
@@ -442,8 +473,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "r",     function () 
         awful.util.spawn("rofi -show drun") end,
 
-              {description = "run rofi prompt", group = "launcher"}),
-
+              {description = "run rofi prompt", group = "launcher"}),    
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run {
