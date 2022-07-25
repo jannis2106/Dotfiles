@@ -543,6 +543,15 @@ globalkeys = gears.table.join(
         volume.update()
     end, {description = "toggle volume", group = "widgets"}),
 
+    -- Brightness
+    awful.key({}, "XF86MonBrightnessUp", function ()
+        awful.util.spawn("xbacklight -inc 10")    
+    end, {description = "increase backlight by 5", group = "screen"}),
+   
+    awful.key({}, "XF86MonBrightnessDown", function ()
+        awful.util.spawn("xbacklight -dec 10")    
+    end, {description = "decrease backlight by 5", group = "screen"}),
+
     -- Screenshot
     awful.key({}, "Print", function()
         awful.util.spawn("flameshot full -p /home/jannis/Pictures/screenshots")
