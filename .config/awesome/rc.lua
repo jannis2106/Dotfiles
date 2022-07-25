@@ -196,7 +196,7 @@ function shuffle(tbl)
   return tbl
 end
 
-if secrets.randomColor then
+if secrets.randomWidgetColor then
     shuffle(colors)
 end
 
