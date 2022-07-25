@@ -196,7 +196,9 @@ function shuffle(tbl)
   return tbl
 end
 
-shuffle(colors)
+if secrets.randomColor then
+    shuffle(colors)
+end
 
 local wicolors = {
     bat = colors[1],
@@ -211,9 +213,39 @@ local batIcon = makeFaIcon('\u{f578}', wicolors.bat)
 local bat = lain.widget.bat {
     battery = "BAT1",
     settings = function()
-        widget:set_markup(markup.fg.color(wicolors.bat, bat_now.perc .. "%"))
-    end,
-    
+    bat_notification_charged_preset = {
+        title = "Battery full",
+        text = "You can unplug the cable",
+        timeout = 15,
+        fg = "#29d398",
+        bg = "#191919",
+        border_color = "29d398",
+        margin = 15,
+        margin = 10,
+        opacity = .9,
+    }
+    bat_notification_low_preset = {
+        title = "Battery low",
+        text = "Plug the cable!",
+        timeout = 15,
+        fg = "#AAAAAA",
+        bg = "#191919",
+        border_color = "#fab795",
+        margin = 10,
+        opacity = .9,
+    }
+    bat_notification_critical_preset = {
+        title = "Battery exhausted",
+        text = "Shutdown imminent",
+        timeout = 15,
+        fg = "#e95678",
+        bg = "#191919",
+        border_color = "e95678",
+        margin = 10,
+        opacity = .9,
+    }
+        widget:set_markup(markup.fg.color(wicolors.bat, bat_now.perc .. "%")) 
+    end,    
 }
 
 local cpuIcon = makeFaIcon('\u{f85a}', wicolors.cpu)
