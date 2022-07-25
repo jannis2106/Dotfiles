@@ -6,6 +6,8 @@ local shape = require("gears.shape")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
+local secrets = require("secrets")
+
 local taglistShape = function(cr, width, height)
     shape.transform(shape.rounded_rect) : translate(0, 25) (cr, width, height, 4)
 end
@@ -14,15 +16,33 @@ local hotkeysShape = function(cr, width, height)
     shape.rounded_rect(cr, width, height, 4)
 end
 
+math.randomseed(os.clock()*100000000000)
+
 local theme = {}
 
 local bgColor 		        = "#191919"	-- dark gray
-local accent 	            = "#e95678" -- red
+local accent    	        = "#e95678"
+
+local colors = {
+    "#e95678",
+    "#29d398",
+    "#fab794",
+    "#26bbd9",
+    "#ee64ac",
+    "#59e1e3",
+}
+
+local bg_focusColor 
+if secrets.randomColor then 
+    bg_focusColor = colors[math.random(1, 6)]
+else 
+    bg_focusColor = "#e95678"
+end
 
 theme.font		            = "Mononoki"
 
 theme.bg_normal		        = bgColor
-theme.bg_focus		        = "#59e1e3"
+theme.bg_focus		        = bg_focusColor
 theme.bg_urgent		        = accent
 theme.bg_minimize	        = "#444444"
 theme.bg_systray	        = bgColor
