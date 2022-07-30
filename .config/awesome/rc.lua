@@ -178,10 +178,10 @@ end
 local markup = lain.util.markup
 
 local colors = {
-    "#e95678",
     "#29d389",
-    "#fab795",
+    "#e95678",
     "#26bbd9",
+    "#fab795",
     "#ee64ac",
     "#59e1e3",
 }
@@ -201,10 +201,10 @@ if secrets.randomWidgetColor then
 end
 
 local wicolors = {
-    bat = colors[1],
-    cpu = colors[2],
-    mem = colors[3],
-    net = colors[4],
+    cpu = colors[1],
+    mem = colors[2],
+    net = colors[3],
+    bat = colors[4],
     volume = colors[5],
     weather = colors[6]
 }
