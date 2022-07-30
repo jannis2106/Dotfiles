@@ -21,7 +21,6 @@ math.randomseed(os.clock()*100000000000)
 local theme = {}
 
 local bgColor 		        = "#191919"	-- dark gray
-local accent    	        = "#e95678"
 
 local colors = {
     "#e95678",
@@ -32,20 +31,20 @@ local colors = {
     "#59e1e3",
 }
 
-local bg_focusColor 
+local accent 
 if secrets.randomColor then 
-    bg_focusColor = colors[math.random(1, 6)]
+    accent = colors[math.random(1, 6)]
 else 
-    bg_focusColor = "#e95678"
+    accent = "#e95678"
 end
 
 theme.font		            = "Mononoki"
 
 theme.bg_normal		        = bgColor
-theme.bg_focus		        = bg_focusColor
+theme.bg_focus		        = accent
 theme.bg_urgent		        = accent
 theme.bg_minimize	        = "#444444"
-theme.bg_systray	        = bgColor
+theme.bg_systray	        = theme.bg_normal
 
 theme.fg_normal		        = "#AAAAAA"
 theme.fg_focus		        = "#FFFFFF"
