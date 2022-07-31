@@ -178,12 +178,12 @@ end
 local markup = lain.util.markup
 
 local colors = {
-    "#29d389",
-    "#e95678",
-    "#26bbd9",
-    "#fab795",
-    "#ee64ac",
-    "#59e1e3",
+    "#e95678", -- red
+    "#29d389", -- green
+    "#fab795", -- yellow
+    "#26bbd9", -- blue
+    "#ee64ac", -- pink
+    "#59e1e3", -- cyan
 }
 
 -- randomize colors
