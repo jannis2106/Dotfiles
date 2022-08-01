@@ -51,7 +51,7 @@ modkey      = "Mod4"
 terminal    = "alacritty"
 editor      = os.getenv("EDITOR") or "nvim"
 editor_cmd  = terminal .. " -e " .. editor
-browsert    = "qutebrowser"
+browser     = os.getenv("HOME") .. "/Applications/Brave.AppImage"
 
 -- awesome variables
 awful.layout.layouts = {
@@ -365,7 +365,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-	layout = wibox.layout.align.horizontal(),
+	      layout = wibox.layout.align.horizontal(), -- makes it invisible
         buttons = tasklist_buttons
     }
 
@@ -555,7 +555,13 @@ globalkeys = gears.table.join(
     -- Screenshot
     awful.key({}, "Print", function()
         awful.util.spawn("flameshot full -p /home/jannis/Pictures/screenshots")
-    end, {description = "take screenshot", group = "screen"})
+    end, {description = "take screenshot", group = "screen"}),
+
+    -- Browser
+    awful.key({ modkey }, "b", function () 
+      awful.spawn(browser) 
+    end, {description = "Launch Brave", group = "launcher"})
+
 )
 
 clientkeys = gears.table.join(
