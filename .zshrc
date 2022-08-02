@@ -9,7 +9,6 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
