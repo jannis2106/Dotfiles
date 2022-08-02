@@ -1,5 +1,16 @@
 ### Exports ###
-export ZSH="$HOME/.oh-my-zsh"
+# XDG
+export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_STATE_HOME="$HOME"/.local/state
+export XDG_CACHE_HOME="$HOME"/.cache
+
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
+export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -99,3 +110,5 @@ alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
 # spicetify
 export PATH=$PATH:/home/jannis/.spicetify
 alias spicetify="~/.spicetify/spicetify"
+
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
