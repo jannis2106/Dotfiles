@@ -51,7 +51,7 @@ modkey      = "Mod4"
 terminal    = "alacritty"
 editor      = os.getenv("EDITOR") or "nvim"
 editor_cmd  = terminal .. " -e " .. editor
-browser     = os.getenv("HOME") .. "/Applications/Brave.AppImage"
+browser     = os.getenv("HOME") .. "/Applications/Brave_8529d5a0c6a04459bd09244c07f440fd.AppImage"
 
 -- awesome variables
 awful.layout.layouts = {
@@ -244,7 +244,7 @@ local bat = lain.widget.bat {
         margin = 10,
         opacity = .9,
     }
-        widget:set_markup(markup.fg.color(wicolors.bat, bat_now.perc .. "%")) 
+    widget:set_markup(markup.fg.color(wicolors.bat, bat_now.perc .. "%")) 
     end,    
 }
 
@@ -389,19 +389,19 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spacing = 0,
-    	    -- mykeyboardlayout,
+    	      -- mykeyboardlayout,
             wibox.widget { cpuIcon, cpu.widget, layout = wibox.layout.align.horizontal },
-	        separator,
+	          separator,
             wibox.widget { memIcon, mem.widget, layout = wibox.layout.align.horizontal },
             separator,
             wibox.widget { netIcon, net.widget, layout = wibox.layout.align.horizontal },
-	        separator, 
+	          separator, 
             wibox.widget { batIcon, bat.widget, layout = wibox.layout.align.horizontal },
-	        separator, 
+	          separator, 
             wibox.widget { volumeIcon, volume.widget, layout = wibox.layout.align.horizontal },
-	        separator, 
-	        wibox.widget { weatherIcon, weather.widget, layout = wibox.layout.align.horizontal },
-	        separator,
+	          separator, 
+	          wibox.widget { weatherIcon, weather.widget, layout = wibox.layout.align.horizontal },
+	          separator,
             wibox.widget { clockIcon, clock, layout = wibox.layout.align.horizontal },
             -- mytextclock,
             -- wibox.widget.systray(),
