@@ -9,14 +9,14 @@ local themes_path = gfs.get_themes_dir()
 local secrets = require("secrets")
 
 local taglistShape = function(cr, width, height)
-    shape.transform(shape.rounded_rect) : translate(0, 25) (cr, width, height, 4)
+    shape.transform(shape.rounded_rect):translate(0, 25)(cr, width, height, 4)
 end
 
 local hotkeysShape = function(cr, width, height)
     shape.rounded_rect(cr, width, height, 4)
 end
 
-math.randomseed(os.clock()*100000000000)
+math.randomseed(os.clock() * 100000000000)
 
 local theme = {}
 
@@ -28,7 +28,7 @@ local colors = {
     "#fab794",
     "#26bbd9",
     "#ee64ac",
-    "#59e1e3",
+    "#59e1e3"
 }
 
 local accent 
