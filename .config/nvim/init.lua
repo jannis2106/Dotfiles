@@ -68,10 +68,10 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
 -- Resize splits
-map("n", "<C-Left>", ":vertical resize +5<CR>")
-map("n", "<C-Right>", ":vertical resize -5<CR>")
-map("n", "<C-Up>", ":resize +5<CR>")
-map("n", "<C-Down>", ":resize -5<CR>")
+map("n", "<C-Left>", ":vertical resize +4<CR>")
+map("n", "<C-Right>", ":vertical resize -4<CR>")
+map("n", "<C-Up>", ":resize +2<CR>")
+map("n", "<C-Down>", ":resize -2<CR>")
 
 -- Lualine
 local lualineTheme = require'lualine.themes.base16'
@@ -88,7 +88,6 @@ require('lualine').setup {
 }
 
 -- Color scheme
---vim.cmd('colorscheme base16-gruvbox-dark-soft')
 require('base16-colorscheme').setup({
     base00 = '#191919FA', -- background
     base01 = '#262626', -- lighter background
@@ -136,5 +135,4 @@ return require('packer').startup(function(use)
    
     -- Color scheme
     use "RRethy/nvim-base16"
-
 end)
