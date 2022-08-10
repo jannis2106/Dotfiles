@@ -98,11 +98,39 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
+myapplicationmenu = {
+    { "Development", {
+        { "Neovim", terminal .. " -e nvim" },
+        { "VSCode", "code" }
+    }},
+    { "Graphics", {
+        { "Inkscape", "inkscape" }
+    }},
+    { "Internet", {
+        { "Brave", browser }
+    }},
+    { "Office", {
+        { "OnlyOffice", os.getenv("HOME") .. "/Applications/DesktopEditors-x86_64.AppImage" },
+        { "Obsidian", "obsidian" }
+    }},
+    { "Multimedia", {
+        { "Spotify", "spotify" }
+    }},
+    { "System", {
+        { "PCManFM", "pcmanfm" },
+        { "Vifm", terminal .. " -e vifm" },
+        { "Htop", terminal .. " -e htop"},
+        { "KeePass", "keepassxc"}
+    }}
+}
+
 mymainmenu = awful.menu({ 
     items = { 
         { "awesome", myawesomemenu, beautiful.awesome_icon },
-        { "open terminal", terminal }
-    }
+        { "open terminal", terminal },
+        { "all applications", myapplicationmenu }
+    },
+    right_margin = 125
 })
 
 mylauncher = awful.widget.launcher({ 

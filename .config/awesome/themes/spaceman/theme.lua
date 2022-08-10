@@ -74,6 +74,18 @@ theme.hotkeys_border_width  = theme.border_width
 theme.hotkeys_border_color  = theme.border_focus
 theme.hotkeys_shape         = hotkeysShape
 
+-- theme.menu_submenu_icon     =
+-- theme.menu_font             = 
+-- theme.menu_height           = 
+theme.menu_width            = 150
+-- theme.menu_border_color     = 
+theme.menu_border_width     = 0
+theme.menu_fg_focus         = accent
+theme.menu_bg_focus         = bgColor
+theme.menu_fg_normal        = theme.fg_focus
+theme.menu_bg_normal	    = bgColor
+theme.menu_submenu          = "❯"
+
 theme.icons                 = os.getenv("HOME") .. "/.config/awesome/themes/spaceman/icons/"
 theme.layout_cornernw       = theme.icons .. "cornernw.png"
 theme.layout_cornerne       = theme.icons .. "cornerne.png"
