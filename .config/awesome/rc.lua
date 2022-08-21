@@ -629,6 +629,18 @@ globalkeys =
     awful.key({modkey}, "b", function()
             awful.spawn(browser)
         end, {description = "Launch Brave", group = "launcher"}
+    ),
+
+    -- File Explorer
+    awful.key({modkey}, "e", function()
+            awful.spawn("pcmanfm")
+        end, {description = "Launch PCManFM", group = "launcher"}
+    ),
+    
+    -- VSCode
+    awful.key({modkey}, "c", function()
+            awful.spawn("code")
+        end, {description = "Launch VSCode", group = "launcher"}
     )
 )
 
