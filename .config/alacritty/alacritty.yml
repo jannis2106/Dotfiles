@@ -387,7 +387,7 @@ schemes:
       text: '#191919'
       background: '#e95678'
     normal:
-      black:   '#262626'
+      black:   '#191919'
       red:     '#e95678'
       green:   '#29d398'
       yellow:  '#fab795'
