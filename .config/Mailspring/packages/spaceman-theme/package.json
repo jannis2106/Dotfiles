@@ -1,0 +1,12 @@
+{
+  "name": "spaceman-theme",
+  "title": "Spaceman",
+  "displayName": "Spaceman Theme",
+  "theme": "ui",
+  "version": "0.1.0",
+  "description": "Custom Theme.",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  }
+}
