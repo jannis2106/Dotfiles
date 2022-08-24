@@ -1,0 +1,83 @@
+Config { 
+   -- appearance
+     font =         "xft:Mononoki Nerd Font:size=11:bold:antialias=true"
+   , bgColor =      "#191919"
+   , fgColor =      "#f2f2f2"
+   , position =     Static { xpos = 10, ypos = 10, width = 1900, height = 35 }
+   , alpha = 240
+
+   -- layout
+   , sepChar =  "%"   -- delineator between plugin names and straight text
+   , alignSep = "}{"  -- separator between left-right alignment
+   , template = "%UnsafeStdinReader% %mpris2% }{ %EDDV% | %default:Master% | %battery% | %bright% | %date%"
+
+   -- general behavior
+   , lowerOnStart =     False    -- send to bottom of window stack on start
+   , hideOnStart =      False   -- start with window unmapped (hidden)
+   , allDesktops =      True    -- show on all desktops
+   , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+   , pickBroadest =     False   -- choose widest display (multi-monitor)
+   , persistent =       True    -- enable/disable hiding (True = disabled)
+
+   -- plugins
+   --   Numbers can be automatically colored according to their value. xmobar
+   --   decides color based on a three-tier/two-cutoff system, controlled by
+   --   command options:
+   --     --Low sets the low cutoff
+   --     --High sets the high cutoff
+   --
+   --     --low sets the color below --Low cutoff
+   --     --normal sets the color between --Low and --High cutoffs
+   --     --High sets the color above --High cutoff
+   --
+   --   The --template option controls how the plugin is displayed. Text
+   --   color can be set by enclosing in <fc></fc> tags. For more details
+   --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
+   , commands = [
+        -- Spotify
+        Run Mpris2 "spotify" ["-t", "\xf1bc <artist> - <title>"] 10
+
+        -- Weather
+        , Run WeatherX "EDDV" [ 
+             ("clear", "5 \xe30d")
+           , ("sunny", "5 \xe30d")
+           , ("mostly clear", "5 \xe30d")
+           , ("mostly sunny", "5 \xe30d")
+           , ("partly sunny", "5 \xe30c")
+           , ("fair", "5 \xe30d")
+           , ("cloudy","5 \xe312")
+           , ("overcast","5 \xe33d")
+           , ("partly cloudy", "5 \xe302")
+           , ("mostly cloudy", "5 \xe318")
+           , ("considerable cloudiness", "5 \xe312")] 
+           [ "-t", "<skyConditionS> <tempC>°C <skyCondition>" ] 36000
+            
+        -- Volume
+        , Run Volume "default" "Master"
+            [ "-t", "<status>", "--"
+            , "--on", "<fc=#f2f2f2>\xf028</fc> <volume>%"
+            , "--onc", "#f2f2f2"
+            , "--off", "<fc=#e95678>\xf026</fc> <volume>%"
+            , "--offc", "#f2f2f2"
+            ] 1
+
+        -- Battery
+        , Run Battery        [ "--template" , "<acstatus>"
+                             , "--" -- battery specific options
+                                    -- discharging
+                                    , "-o", "\xf578 <left>%"
+                                    -- charging
+                                    , "-O", "\xf583 <left>%"
+                                    -- charged
+                                    , "-i", "<fc=#29d398>\xf58e</fc> <left>%"
+                             ] 50
+        
+        -- Brightness
+        , Run Brightness [ "-t", "\xfbe6 <percent>%", "--", "-D", "intel_backlight" ] 1
+
+        -- Date
+        , Run Date           "\xf133 %d %b %H:%M" "date" 10
+
+        , Run UnsafeStdinReader
+    ]
+}
