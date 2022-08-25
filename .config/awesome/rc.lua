@@ -627,7 +627,7 @@ globalkeys =
     ),
 
     -- Toggle Keyboard Layout
-    awful.key({modkey}, "q", function()
+    awful.key({"Control"}, "space", function()
             awful.util.spawn("sh /home/jannis/.local/bin/toggle_kbd.sh")
         end, {description = "Toggle Keyboard Layout", group = "screen"}
     ),
