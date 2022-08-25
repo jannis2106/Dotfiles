@@ -446,11 +446,10 @@ awful.screen.connect_for_each_screen(
                 -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 0,
-                -- mykeyboardlayout,
-                wibox.widget {cpuIcon, cpu.widget, layout = wibox.layout.align.horizontal},
-                separator,
-                wibox.widget {memIcon, mem.widget, layout = wibox.layout.align.horizontal},
-                separator,
+                --wibox.widget {cpuIcon, cpu.widget, layout = wibox.layout.align.horizontal},
+                --separator,
+                --wibox.widget {memIcon, mem.widget, layout = wibox.layout.align.horizontal},
+                --separator,
                 wibox.widget {netIcon, net.widget, layout = wibox.layout.align.horizontal},
                 separator,
                 wibox.widget {batIcon, bat.widget, layout = wibox.layout.align.horizontal},
@@ -462,7 +461,9 @@ awful.screen.connect_for_each_screen(
                 wibox.widget {clockIcon, clock, layout = wibox.layout.align.horizontal},
                 -- mytextclock,
                 -- wibox.widget.systray(),
-                wibox.widget {markup = "  ", align = "center", valign = "center", widget = wibox.widget.textbox},
+                --wibox.widget {markup = "  ", align = "center", valign = "center", widget = wibox.widget.textbox},
+                separator,
+                mykeyboardlayout,
                 s.mylayoutbox
             }
         }
@@ -623,6 +624,12 @@ globalkeys =
     awful.key({}, "Print", function()
             awful.util.spawn("flameshot full -p /home/jannis/Pictures/screenshots")
         end, {description = "take screenshot", group = "screen"}
+    ),
+
+    -- Toggle Keyboard Layout
+    awful.key({modkey}, "q", function()
+            awful.util.spawn("sh /home/jannis/.local/bin/toggle_kbd.sh")
+        end, {description = "Toggle Keyboard Layout", group = "screen"}
     ),
 
     -- Browser
