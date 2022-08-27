@@ -81,6 +81,32 @@ source $ZSH/oh-my-zsh.sh
 INSERT_MODE_INDICATOR="%F{yellow}+%f"
 bindkey -M viins 'jj' vi-cmd-mode
 
+ex ()
+{
+    if [ -f $1 ] ; then
+        case $1 in
+            *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
+                tar xvf $1       ;;
+            *.cbr|*.rar)
+                unrar x -ad ./$1 ;;
+            *.gz)
+                gunzip ./$1      ;;
+            *.cbz|*.epub|*.zip)
+                unzip ./$1       ;;
+            *.z)
+                uncompress ./$1  ;;
+            *.7z|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
+                7z x ./$1        ;;
+            *.xz)
+                unxz ./$1        ;;
+            *)
+                echo "extract: '$1' - unknown archive method" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
 ### Aliases ###
 
 # confirm commands
