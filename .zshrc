@@ -5,8 +5,11 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_STATE_HOME="$HOME"/.local/state
 export XDG_CACHE_HOME="$HOME"/.cache
 
+# follow XDG
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
+# ZSH
 export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
 
@@ -70,9 +73,13 @@ plugins=(
 	git 
 	zsh-autosuggestions
 	copyfile
+    vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
+
+INSERT_MODE_INDICATOR="%F{yellow}+%f"
+bindkey -M viins 'jj' vi-cmd-mode
 
 ### Aliases ###
 
@@ -96,8 +103,15 @@ alias v="nvim"
 # clear
 alias c="clear"
 
-# formatted date
+# formatted date and time
 alias ddate="date +'%R - %a, %B %d, %Y'"
+alias ttime="while true; do tput clear; date +'%H : %M : %S' | figlet ; sleep 1; done"
+
+# git
+alias add="git add"
+alias commit="git commit -m"
+alias push="git push"
+alias status="git status"
 
 # bare git repo for dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
@@ -106,4 +120,6 @@ alias ccommit="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME commit -m
 alias cpush="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME push"
 alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
 
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+alias tarx="tar xfv"
+
+export PATH
