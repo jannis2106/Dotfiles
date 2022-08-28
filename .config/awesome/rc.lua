@@ -57,7 +57,14 @@ do
     )
 end
 
-beautiful.init("~/.config/awesome/themes/spaceman/theme.lua")
+local themes = {
+    "spaceman", -- 1
+    "floating", -- 2
+}
+-- choose theme
+local theme_chosen = themes[2]
+local theme_path = "~/.config/awesome/themes/" .. theme_chosen .. "/theme.lua"
+beautiful.init(theme_path)
 
 modkey      = "Mod4"
 terminal    = "alacritty"
@@ -133,16 +140,8 @@ mymainmenu = awful.menu({
     right_margin = 125
 })
 
-mylauncher = awful.widget.launcher({ 
-    image = beautiful.awesome_icon,
-    menu = mymainmenu 
-})
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
@@ -203,272 +202,7 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
--- FontAwesome Icons
-local function makeFaIcon( code, color )
-  return wibox.widget{
-    font = "Mononoki Nerd Font ",
-    markup = ' <span color="'.. color ..'">' .. code .. '</span> ',
-    -- align  = 'center',
-    -- valign = 'center',
-    widget = wibox.widget.textbox
-  }
-end
-
--- Lain Widgets
-local markup = lain.util.markup
-
-local colors = {
-    "#e95678", -- red
-    "#29d389", -- green
-    "#fab795", -- yellow
-    "#26bbd9", -- blue
-    "#ee64ac", -- pink
-    "#59e1e3", -- cyan
-}
-
--- randomize colors
-math.randomseed(os.clock() * 100000000000)
-function shuffle(tbl)
-    for i = #tbl, 2, -1 do
-        local j = math.random(i)
-        tbl[i], tbl[j] = tbl[j], tbl[i]
-    end
-    return tbl
-end
-
-if secrets.randomWidgetColor then
-    shuffle(colors)
-end
-
-local wicolors = {
-    cpu = colors[1],
-    mem = colors[2],
-    net = colors[3],
-    bat = colors[4],
-    volume = colors[5],
-    weather = colors[6]
-}
-
-local batIcon = makeFaIcon("\u{f578}", wicolors.bat)
-local bat =
-    lain.widget.bat {
-    battery = "BAT1",
-    settings = function()
-        bat_notification_charged_preset = {
-            title = "Battery full",
-            text = "You can unplug the cable",
-            timeout = 15,
-            fg = "#29d398",
-            bg = "#191919",
-            border_color = "29d398",
-            margin = 10,
-            opacity = .9
-        }
-        bat_notification_low_preset = {
-            title = "Battery low",
-            text = "Plug the cable!",
-            timeout = 120,
-            fg = "#AAAAAA",
-            bg = "#191919",
-            border_color = "#fab795",
-            margin = 10,
-            opacity = .9
-        }
-        bat_notification_critical_preset = {
-            title = "Battery exhausted",
-            text = "Shutdown imminent",
-            timeout = 30,
-            fg = "#e95678",
-            bg = "#191919",
-            border_color = "e95678",
-            margin = 10,
-            opacity = .9
-        }
-        widget:set_markup(markup.fg.color(wicolors.bat, bat_now.perc .. "%"))
-    end
-}
-
-local cpuIcon = makeFaIcon("\u{f85a}", wicolors.cpu)
-local cpu =
-    lain.widget.cpu {
-    timeout = 1,
-    settings = function()
-        widget:set_markup(markup.fg.color(wicolors.cpu, "cpu: " .. cpu_now.usage .. "%"))
-    end
-}
-
-local memIcon = makeFaIcon("\u{f2db}", wicolors.mem)
-local mem =
-    lain.widget.mem {
-    timeout = 1,
-    settings = function()
-        widget:set_markup(markup.fg.color(wicolors.mem, "mem: " .. mem_now.perc .. "% (" .. mem_now.used .. "MiB)"))
-    end
-}
-
-local netIcon = makeFaIcon("\u{f1eb}", wicolors.net)
-local net =
-    lain.widget.net {
-    settings = function()
-        widget:set_markup(markup.fg.color(wicolors.net, " " .. net_now.received .. " ↓↑ " .. net_now.sent))
-    end
-}
-
-local volumeIcon = makeFaIcon("\u{fa7d}", wicolors.volume)
-local volume =
-    lain.widget.alsa {
-    timeout = 1,
-    settings = function()
-        vlevel = volume_now.level .. "%"
-
-        if volume_now.status == "off" then
-            vlevel = vlevel .. " M"
-        end
-
-        widget:set_markup(markup.fg.color(wicolors.volume, vlevel))
-    end
-}
-
-local cal =
-    lain.widget.cal {
-    attach_to = {
-        mytextclock
-    },
-    week_number = "left",
-    notification_preset = {
-        font = "Mononoki",
-        fg = "#dddddd",
-        bg = "#191919"
-    }
-}
-mytextclock:connect_signal(
-    "button::press",
-    function(_, _, _, button)
-        if button == 1 then
-            cal.show(7)
-        end
-    end
-)
-
-local weatherIcon = makeFaIcon("\u{e30d}", wicolors.weather)
-local weather =
-    lain.widget.weather {
-    APPID = secrets.APPID,
-    city_id = secrets.city_id,
-    settings = function()
-        descr = weather_now["weather"][1]["description"]:lower()
-        units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fg.color(wicolors.weather, " " .. descr .. " @ " .. units .. "°C"))
-    end,
-    showpopup = "off"
-}
-
-local clockIcon = makeFaIcon("\u{f133}", "#ffffff")
-local clock =
-    awful.widget.watch(
-    "date +'%R - %a, %B %d, %Y'",
-    1,
-    function(widget, stdout)
-        widget:set_markup(markup.fg.color("#ffffff", stdout))
-    end
-)
-
-local separator =
-    wibox.widget {
-    markup = "  |",
-    align = "center",
-    valign = "center",
-    widget = wibox.widget.textbox
-}
-awful.screen.connect_for_each_screen(
-    function(s)
-        -- Wallpaper
-        set_wallpaper(s)
-
-        -- local tagList = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
-        local tagList = {" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "}
-
-        -- Each screen has its own tag table.
-        awful.tag(tagList, s, awful.layout.layouts[1])
-
-        -- Create a promptbox for each screen
-        s.mypromptbox = awful.widget.prompt()
-
-        -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-        -- We need one layoutbox per screen.
-        s.mylayoutbox = awful.widget.layoutbox(s)
-        s.mylayoutbox:buttons(gears.table.join(
-            awful.button({ }, 1, function() awful.layout.inc( 1) end),
-            awful.button({ }, 3, function() awful.layout.inc(-1) end),
-            awful.button({ }, 4, function() awful.layout.inc( 1) end),
-            awful.button({ }, 5, function() awful.layout.inc(-1) end)
-        ))
-
-        -- Create a taglist widget
-        s.mytaglist =
-            awful.widget.taglist {
-            screen = s,
-            filter = awful.widget.taglist.filter.all,
-            buttons = taglist_buttons
-        }
-
-        -- Create a tasklist widget
-        s.mytasklist =
-            awful.widget.tasklist {
-            screen = s,
-            filter = awful.widget.tasklist.filter.currenttags,
-            layout = wibox.layout.align.horizontal(), -- makes it invisible
-            buttons = tasklist_buttons
-        }
-
-        -- Create the wibox
-        s.mywibox =
-            awful.wibar(
-            {
-                position = "top",
-                screen = s,
-                bg = beautiful.bg_normal .. "aa"
-            }
-        )
-
-        -- Add widgets to the wibox
-        s.mywibox:setup {
-            layout = wibox.layout.align.horizontal,
-            {
-                -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
-                mylauncher,
-                s.mytaglist,
-                s.mypromptbox
-            },
-            s.mytasklist, -- Middle widget
-            {
-                -- Right widgets
-                layout = wibox.layout.fixed.horizontal,
-                spacing = 0,
-                --wibox.widget {cpuIcon, cpu.widget, layout = wibox.layout.align.horizontal},
-                --separator,
-                --wibox.widget {memIcon, mem.widget, layout = wibox.layout.align.horizontal},
-                --separator,
-                wibox.widget {netIcon, net.widget, layout = wibox.layout.align.horizontal},
-                separator,
-                wibox.widget {batIcon, bat.widget, layout = wibox.layout.align.horizontal},
-                separator,
-                wibox.widget {volumeIcon, volume.widget, layout = wibox.layout.align.horizontal},
-                separator,
-                wibox.widget {weatherIcon, weather.widget, layout = wibox.layout.align.horizontal},
-                separator,
-                wibox.widget {clockIcon, clock, layout = wibox.layout.align.horizontal},
-                -- mytextclock,
-                -- wibox.widget.systray(),
-                --wibox.widget {markup = "  ", align = "center", valign = "center", widget = wibox.widget.textbox},
-                separator,
-                mykeyboardlayout,
-                s.mylayoutbox
-            }
-        }
-    end
-)
+awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 
 -- Mouse bindings
 root.buttons(gears.table.join(
@@ -595,18 +329,18 @@ globalkeys =
     
     -- Volume
     awful.key({}, "XF86AudioRaiseVolume", function()
-            os.execute(string.format("amixer set %s 1%%+", volume.channel))
-            volume.update()
+            os.execute(string.format("amixer set %s 1%%+", beautiful.volume.channel))
+            beautiful.volume.update()
         end, {description = "increase volume", group = "widgets"}
     ),
     awful.key({}, "XF86AudioLowerVolume", function()
-            os.execute(string.format("amixer set %s 1%%-", volume.channel))
-            volume.update()
+            os.execute(string.format("amixer set %s 1%%-", beautiful.volume.channel))
+            beautiful.volume.update()
         end, {description = "decrease volume", group = "widgets"}
     ),
     awful.key({}, "XF86AudioMute", function()
-            os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
-            volume.update()
+            os.execute(string.format("amixer set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
+            beautiful.volume.update()
         end, {description = "toggle volume", group = "widgets"}
     ),
 
@@ -951,5 +685,6 @@ client.connect_signal(
 )
 
 -- Autostart Applications
-awful.spawn.with_shell("picom")
-awful.spawn.with_shell("pulseaudio")    
+awful.spawn.with_shell("picom --experimental-backend")
+awful.spawn.with_shell("pulseaudio")
+-- awful.spawn.with_shell("nitrogen --restore &")
