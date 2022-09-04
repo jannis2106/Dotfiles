@@ -382,6 +382,16 @@ globalkeys =
     awful.key({modkey}, "c", function()
             awful.spawn("code")
         end, {description = "Launch VSCode", group = "launcher"}
+    ),
+
+    awful.key({modkey, "Shift"}, "o", function()
+        awful.spawn("/home/jannis/Applications/Obsidian-0.15.9.AppImage")
+        end, {description = "Launch Obsidian", group = "launcher"}
+    ),
+
+    awful.key({modkey}, "=", function()
+            awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
+        end, {description = "Toggle systray visibility", group = "custom"}
     )
 )
 
@@ -687,4 +697,4 @@ client.connect_signal(
 -- Autostart Applications
 awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("pulseaudio")
--- awful.spawn.with_shell("nitrogen --restore &")
+awful.spawn.with_shell("feh --randomize --bg-fill ~/Pictures/wallpaper/*")
