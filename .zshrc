@@ -118,6 +118,9 @@ alias rm="rm -i"
 alias ls="exa -al --group-directories-first"
 alias lt="exa -aT --group-directories-first --icons"
 
+# change "cat" to "bat"
+alias cat="bat"
+
 # pacman / yay
 alias pac="sudo pacman"
 alias pacsyu="sudo pacman -Syu"		# update package list and upgrade all packages afterwards
@@ -145,7 +148,5 @@ alias cadd="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME add"
 alias ccommit="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME commit -m"
 alias cpush="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME push"
 alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
-
-alias tarx="tar xfv"
 
 export PATH
