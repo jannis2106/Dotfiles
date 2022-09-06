@@ -26,18 +26,18 @@ Config {
 
         -- Weather
         , Run WeatherX "EDDV" [ 
-             ("clear", "5 \xe30d")
-           , ("sunny", "5 \xe30d")
-           , ("mostly clear", "5 \xe30d")
-           , ("mostly sunny", "5 \xe30d")
-           , ("partly sunny", "5 \xe30c")
-           , ("fair", "5 \xe30d")
-           , ("cloudy","5 \xe312")
-           , ("overcast","5 \xe33d")
-           , ("partly cloudy", "5 \xe302")
-           , ("mostly cloudy", "5 \xe318")
-           , ("considerable cloudiness", "5 \xe312")] 
-           [ "-t", "<skyConditionS> <tempC>°C <skyCondition>" ] 36000
+             ("clear", "\xe30d")
+           , ("sunny", "\xe30d")
+           , ("mostly clear", "\xe30d")
+           , ("mostly sunny", "\xe30d")
+           , ("partly sunny", "\xe30c")
+           , ("fair", "\xe30d")
+           , ("cloudy","\xe312")
+           , ("overcast","\xe33d")
+           , ("partly cloudy", "\xe302")
+           , ("mostly cloudy", "\xe318")
+           , ("considerable cloudiness", "\xe312")] 
+           [ "-t", "<skyConditionS> <tempC>°C" ] 36000
             
         -- Volume
         , Run Volume "default" "Master"
