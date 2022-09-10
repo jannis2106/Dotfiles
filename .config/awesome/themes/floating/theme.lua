@@ -168,7 +168,7 @@ local weather =
     settings = function()
         descr = weather_now["weather"][1]["description"]
         units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(setMarkup(theme.color, " " .. descr .. " | " .. units .. "°C"))
+        widget:set_markup(setMarkup(theme.color, " " .. descr .. " - " .. units .. "°C"))
     end,
     showpopup = "off"
 }
