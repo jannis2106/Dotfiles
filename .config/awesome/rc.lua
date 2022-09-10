@@ -698,3 +698,4 @@ client.connect_signal(
 awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("pulseaudio")
 awful.spawn.with_shell("feh --randomize --bg-fill ~/Pictures/wallpaper/*")
+awful.spawn.with_shell("dropbox")
