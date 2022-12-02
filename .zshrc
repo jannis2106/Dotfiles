@@ -149,4 +149,7 @@ alias ccommit="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME commit -m
 alias cpush="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME push"
 alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
 
+alias hltvf="python ~/workspace/HLTVTerminal/App.py"
+alias hltvp="python ~/workspace/HLTVTerminal/Print.py"
+
 export PATH
