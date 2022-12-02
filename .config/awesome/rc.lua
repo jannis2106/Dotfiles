@@ -355,7 +355,7 @@ globalkeys =
     ),
 
     -- Screenshot
-    awful.key({}, "Print", function()
+    awful.key({modkey}, "Print", function()
             awful.util.spawn("flameshot full -p /home/jannis/Pictures/screenshots")
         end, {description = "take screenshot", group = "screen"}
     ),
@@ -699,3 +699,4 @@ awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("pulseaudio")
 awful.spawn.with_shell("feh --randomize --bg-fill ~/Pictures/wallpaper/*")
 awful.spawn.with_shell("dropbox")
+awful.spawn.with_shell("python /home/jannis/workspace/HLTVTerminal/App.py")
