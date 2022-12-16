@@ -208,6 +208,7 @@ local mpris, mpris_timer = awful.widget.watch(
         local artist = nil
         local title = nil
         local album = nil
+        local source = nil
 
         for line in string.gmatch(stdout, "[^\r\n]+") do
             if not artist then
@@ -221,10 +222,16 @@ local mpris, mpris_timer = awful.widget.watch(
             if not album then
                 album = string.match(line, ".*artUrl%s*(.+)")
             end
+
+            if not source then
+                source = string.match(line, ".*trackid%s*(.+)")
+            end
         end
 
-        if artist and title then
-            text = " " .. escape_f(artist) .. " - " .. escape_f(title)
+        local isSpotify = string.find(source, "spotify")
+
+        if artist and title and isSpotify then
+            text = " " .. escape_f(artist) .. "   " .. escape_f(title)
         else
             text = "no song playing..."    
         end
