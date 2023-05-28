@@ -60,9 +60,10 @@ end
 local themes = {
     "spaceman", -- 1
     "floating", -- 2
+    "floating-bw", --3
 }
 -- choose theme
-local theme_chosen = themes[2]
+local theme_chosen = themes[3]
 local theme_path = "~/.config/awesome/themes/" .. theme_chosen .. "/theme.lua"
 beautiful.init(theme_path)
 
@@ -70,8 +71,8 @@ modkey      = "Mod4"
 terminal    = "alacritty"
 editor      = os.getenv("EDITOR") or "nvim"
 editor_cmd  = terminal .. " -e " .. editor
-browser     = os.getenv("HOME") .. "/Applications/Brave_8529d5a0c6a04459bd09244c07f440fd.AppImage"
-
+-- browser     = os.getenv("HOME") .. "/Applications/Brave_8529d5a0c6a04459bd09244c07f440fd.AppImage"
+    browser     = "brave"
 -- awesome variables
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -322,10 +323,10 @@ globalkeys =
     ),
 
     -- Menubar
-    awful.key({modkey}, "p", function()
-            menubar.show()
-        end, {description = "show the menubar", group = "launcher"}
-    ),
+    -- awful.key({modkey}, "p", function()
+    --         menubar.show()
+    --     end, {description = "show the menubar", group = "launcher"}
+    -- ),
     
     -- Volume
     awful.key({}, "XF86AudioRaiseVolume", function()
@@ -346,14 +347,21 @@ globalkeys =
 
     -- Brightness
     awful.key({}, "XF86MonBrightnessUp", function()
-            awful.util.spawn("xbacklight -inc 10")
-        end, {description = "increase backlight by 5", group = "screen"}
+            awful.util.spawn("xbacklight -inc 1")
+        end, {description = "increase backlight by 1", group = "screen"}
     ),
     awful.key({}, "XF86MonBrightnessDown", function()
-            awful.util.spawn("xbacklight -dec 10")
-        end, {description = "decrease backlight by 5", group = "screen"}
+            awful.util.spawn("xbacklight -dec 1")
+        end, {description = "decrease backlight by 1", group = "screen"}
     ),
-
+    awful.key({"Shift"}, "XF86MonBrightnessUp", function()
+            awful.util.spawn("xbacklight -inc 10")
+        end, {description = "increase backlight by 10", group = "screen"}
+    ),
+    awful.key({"Shift"}, "XF86MonBrightnessDown", function()
+            awful.util.spawn("xbacklight -dec 10")
+        end, {description = "decrease backlight by 10", group = "screen"}
+    ),
     -- Screenshot
     awful.key({modkey}, "Print", function()
             awful.util.spawn("flameshot full -p /home/jannis/Pictures/screenshots")
@@ -384,14 +392,22 @@ globalkeys =
         end, {description = "Launch VSCode", group = "launcher"}
     ),
 
+    -- Obsidian
     awful.key({modkey, "Shift"}, "o", function()
         awful.spawn("/home/jannis/Applications/Obsidian-0.15.9.AppImage")
         end, {description = "Launch Obsidian", group = "launcher"}
     ),
 
+    -- toggle systray
     awful.key({modkey}, "=", function()
             awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
         end, {description = "Toggle systray visibility", group = "custom"}
+    ),
+
+    -- deadd notification center
+    awful.key({modkey}, "p", function()
+        awful.spawn.with_shell("kill -s USR1 $(pidof deadd-notification-center)")
+        end, {description = "Toggle Notification Center", group = "custom"}
     )
 )
 
@@ -697,6 +713,7 @@ client.connect_signal(
 -- Autostart Applications
 awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("pulseaudio")
+awful.spawn.with_shell("deadd-notification-center")
 awful.spawn.with_shell("feh --randomize --bg-fill ~/Pictures/wallpaper/*")
 awful.spawn.with_shell("dropbox")
 awful.spawn.with_shell("python /home/jannis/workspace/HLTVTerminal/App.py")
