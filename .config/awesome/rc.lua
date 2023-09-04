@@ -61,9 +61,10 @@ local themes = {
     "spaceman", -- 1
     "floating", -- 2
     "floating-bw", --3
+    "simple", --4
 }
 -- choose theme
-local theme_chosen = themes[3]
+local theme_chosen = themes[4]
 local theme_path = "~/.config/awesome/themes/" .. theme_chosen .. "/theme.lua"
 beautiful.init(theme_path)
 
@@ -338,6 +339,16 @@ globalkeys =
             os.execute(string.format("amixer set %s 1%%-", beautiful.volume.channel))
             beautiful.volume.update()
         end, {description = "decrease volume", group = "widgets"}
+    ),    
+    awful.key({"Shift"}, "XF86AudioRaiseVolume", function()
+            os.execute(string.format("amixer set %s 10%%+", beautiful.volume.channel))
+            beautiful.volume.update()
+        end, {description = "increase volume by 10", group = "widgets"}
+    ),
+    awful.key({"Shift"}, "XF86AudioLowerVolume", function()
+            os.execute(string.format("amixer set %s 10%%-", beautiful.volume.channel))
+            beautiful.volume.update()
+        end, {description = "decrease volume by 10", group = "widgets"}
     ),
     awful.key({}, "XF86AudioMute", function()
             os.execute(string.format("amixer set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
@@ -369,7 +380,7 @@ globalkeys =
     ),
 
     -- Toggle Keyboard Layout
-    awful.key({"Control"}, "space", function()
+    awful.key({"Shift"}, "space", function()
             awful.util.spawn("sh /home/jannis/.local/bin/toggle_kbd.sh")
         end, {description = "Toggle Keyboard Layout", group = "screen"}
     ),
@@ -394,7 +405,7 @@ globalkeys =
 
     -- Obsidian
     awful.key({modkey, "Shift"}, "o", function()
-        awful.spawn("/home/jannis/Applications/Obsidian-0.15.9.AppImage")
+        awful.spawn("obsidian")
         end, {description = "Launch Obsidian", group = "launcher"}
     ),
 
@@ -408,6 +419,12 @@ globalkeys =
     awful.key({modkey}, "p", function()
         awful.spawn.with_shell("kill -s USR1 $(pidof deadd-notification-center)")
         end, {description = "Toggle Notification Center", group = "custom"}
+    ),
+
+    -- lock
+    awful.key({modkey}, "XF86PowerOff", function()
+        awful.spawn.with_shell("i3lock -c 000000")
+    end, {description = "lock with i3lock", group = "awesome"}
     )
 )
 
@@ -714,6 +731,7 @@ client.connect_signal(
 awful.spawn.with_shell("picom --experimental-backend")
 awful.spawn.with_shell("pulseaudio")
 awful.spawn.with_shell("deadd-notification-center")
-awful.spawn.with_shell("feh --randomize --bg-fill ~/Pictures/wallpaper/*")
+awful.spawn.with_shell("feh --randomize --bg-fill ~/Pictures/wallpaper/simple/*")
 awful.spawn.with_shell("dropbox")
 awful.spawn.with_shell("python /home/jannis/workspace/HLTVTerminal/App.py")
+awful.util.spawn("xinput set-prop 'SYNA7DAB:01 06CB:CD40 Touchpad' 'Synaptics Tap Action' 1 1 1 2 1 3")
