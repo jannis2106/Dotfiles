@@ -1,4 +1,9 @@
 ### Exports ###
+
+# RUST
+export RUST_BACKTRACE=full
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/library"
+
 # XDG
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CONFIG_HOME="$HOME"/.config
@@ -123,7 +128,7 @@ alias cat="bat"
 
 # pacman / yay
 alias pac="sudo pacman"
-alias pacsyu="sudo pacman -Syu"		# update package list and upgrade all packages afterwards
+alias pacsyu="sudo pacman -Syu"		    # update package list and upgrade all packages afterwards
 alias yaysua="yay -Sua --noconfirm" 	# synchronize and update AUR packages
 
 # vim
@@ -152,4 +157,11 @@ alias cstatus="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME status"
 alias hltvf="python ~/workspace/HLTVTerminal/App.py"
 alias hltvp="python ~/workspace/HLTVTerminal/Print.py"
 
-export PATH
+alias ha="nvim ~/Documents/Schule/ha.md"
+alias todo="nvim ~/Documents/todo.md"
+
+# twitch
+alias blast="dl-stream -cw twitch.tv/blastpremier"
+alias esl="dl-stream -cw twitch.tv/eslcs"
+
+export PATH=/usr/bin/swww:/home/jannis/.cargo/bin:$PATH
