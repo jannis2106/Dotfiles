@@ -179,180 +179,6 @@ draw_bold_text_with_bright_colors: true
 
 # Color Schemes
 schemes:
-  ### Dracula ###
-  Dracula: &Dracula
-    primary:
-      background: '#282a36'
-      foreground: '#f8f8f2'
-      bright_foreground: '#ffffff'
-    cursor:
-      text: CellBackground
-      cursor: CellForeground
-    vi_mode_cursor:
-      text: CellBackground
-      cursor: CellForeground
-    search:
-      matches:
-        foreground: '#44475a'
-        background: '#50fa7b'
-      focused_match:
-        foreground: '#44475a'
-        background: '#ffb86c'
-      footer_bar:
-        background: '#282a36'
-        foreground: '#f8f8f2'
-    hints:
-      start:
-        foreground: '#282a36'
-        background: '#f1fa8c'
-      end:
-        foreground: '#f1fa8c'
-        background: '#282a36'
-    line_indicator:
-      foreground: None
-      background: None
-    selection:
-      text: CellForeground
-      background: '#44475a'
-    normal:
-      black: '#21222c'
-      red: '#ff5555'
-      green: '#50fa7b'
-      yellow: '#f1fa8c'
-      blue: '#bd93f9'
-      magenta: '#ff79c6'
-      cyan: '#8be9fd'
-      white: '#f8f8f2'
-    bright:
-      black: '#6272a4'
-      red: '#ff6e6e'
-      green: '#69ff94'
-      yellow: '#ffffa5'
-      blue: '#d6acff'
-      magenta: '#ff92df'
-      cyan: '#a4ffff'
-      white: '#ffffff'
-
-  ### Tomorrow Night ###
-  TomorrowNight:
-    primary:
-      background: '#1f1f1f'
-      foreground: '#c5c8c6'
-    cursor:
-      text: CellBackground
-      cursor: CellForeground
-    vi_mode_cursor:
-      text: CellBackground
-      cursor: CellForeground
-    search:
-      matches:
-        foreground: '#000000'
-        background: '#ffffff'
-      focused_match:
-        foreground: '#ffffff'
-        background: '#000000'
-      footer_bar:
-        background: '#c5c8c6'
-        foreground: '#1d1f21'
-    hints:
-      start:
-        foreground: '#1d1f21'
-        background: '#e9ff5e'
-      end:
-        foreground: '#e9ff5e'
-        background: '#1d1f21'
-    line_indicator:
-      foreground: None
-      background: None
-  
-    # Normal colors
-    normal:
-      black:   '#1d1f21'
-      red:     '#cc6666'
-      green:   '#b5bd68'
-      yellow:  '#f0c674'
-      blue:    '#81a2be'
-      magenta: '#b294bb'
-      cyan:    '#8abeb7'
-      white:   '#c5c8c6'
-  
-    # Bright colors
-    bright:
-      black:   '#666666'
-      red:     '#d54e53'
-      green:   '#b9ca4a'
-      yellow:  '#e7c547'
-      blue:    '#7aa6da'
-      magenta: '#c397d8'
-      cyan:    '#70c0b1'
-      white:   '#eaeaea'
-  
-      # Dim colors
-    dim:
-      black:   '#131415'
-      red:     '#864343'
-      green:   '#777c44'
-      yellow:  '#9e824c'
-      blue:    '#556a7d'
-      magenta: '#75617b'
-      cyan:    '#5b7d78'
-      white:   '#828482'
-
-  Custom1: &Custom1
-    primary:
-      background: '#191919'
-      foreground: '#c5c8c6'
-    cursor:
-      text: CellBackground
-      cursor: CellForeground
-    vi_mode_cursor:
-      text: CellBackground
-      cursor: CellForeground
-    search:
-      matches:
-        foreground: '#44475a'
-        background: '#50fa7b'
-      focused_match:
-        foreground: '#44475a'
-        background: '#ffb86c'
-      footer_bar:
-        background: '#282a36'
-        foreground: '#f8f8f2'
-    hints:
-      start:
-        foreground: '#282a36'
-        background: '#f1fa8c'
-      end:
-        foreground: '#f1fa8c'
-        background: '#282a36'
-    line_indicator:
-      foreground: None
-      background: None
-    selection:
-      text: '#191919'
-      background: '#D7859C'
-    normal:
-      black:   '#1d1d21'
-      red:     '#f54e52'
-      green:   '#A9DC76'
-      yellow:  '#FFD866'
-      blue:    '#A7C8FC'
-      magenta: '#AB9DF2'
-      cyan:    '#78DCE8'
-      white:   '#FCFCFA'
-
-    # Bright colors
-    bright:
-      black:   '#666666'
-      red:     '#f77269'
-      green:   '#b5e189'
-      yellow:  '#FFDF80'
-      blue:    '#B5D0FC'
-      magenta: '#BDB2F5'
-      cyan:    '#8EE2EC'
-      white:   '#FFFFFF'
-
-
   Spaceman: &Spaceman
     primary:
       background: '#191919'
@@ -405,14 +231,68 @@ schemes:
       blue:    '#3fc7de'
       magenta: '#f075b5'
       cyan:    '#6be4e6'
+      white:   '#ffffff'
+
+  #####
+
+  Simple: &Simple
+    primary:
+      background: '#1c1e26'
+      foreground: '#d5d6dc'
+    cursor:
+      text: CellBackground
+      cursor: CellForeground
+    vi_mode_cursor:
+      text: CellBackground
+      cursor: CellForeground
+    search:
+      matches:
+        foreground: '#262833'
+        background: '#85f07c'
+      focused_match:
+        foreground: '#262833'
+        background: '#7ce9f0'
+      footer_bar:
+        background: '#262833'
+        foreground: '#f2f2f2'
+    hints:
+      start:
+        foreground: '#262833'
+        background: '#f0bb7c'
+      end:
+        foreground: '#f0bb7c'
+        background: '#262833'
+    line_indicator:
+      foreground: None
+      background: None
+    selection:
+      text: '#262833'
+      background: '#f07d7c'
+    normal:
+      black:   '#262833'
+      red:     '#f07d7c'
+      green:   '#85f07c'
+      yellow:  '#e7f07c'
+      blue:    '#7ca4f0'
+      magenta: '#f07cd6'
+      cyan:    '#7cd4f0'
+      white:   '#f2f2f2'
+
+    # Bright colors
+    bright:
+      black:   '#3a3c46'
+      red:     '#faa4a3'
+      green:   '#aafaa3'
+      yellow:  '#f3faa3'
+      blue:    '#a3c1fa'
+      magenta: '#faa3e7'
+      cyan:    '#a3e5fa'
       white:   '#FFFFFF'
-
-
 
 
 # Set Color Scheme
   
-colors: *Spaceman
+colors: *Simple
 
 # Bell
 #
