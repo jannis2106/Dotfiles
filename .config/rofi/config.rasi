@@ -2,4 +2,4 @@ configuration {
     modi: "window,run,drun,ssh,combi";
     font: "Mononoki Nerd Font";
     combi-modi: "window,drun,ssh";
-} @theme "~/.config/rofi/themes/spaceman.rasi"
+} @theme "~/.config/rofi/themes/simple.rasi"
