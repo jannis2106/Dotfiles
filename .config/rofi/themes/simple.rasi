@@ -16,6 +16,7 @@
     width: 50em;
     border:  1;
     padding: 5;
+    border-radius: 2px;
 }
 
 #mainbox {
@@ -83,7 +84,7 @@
     background-color: @prompt-background;
     text-color:       @prompt-foreground;
     font:             @prompt-font;
-    border-radius:    5px;
+    border-radius:    2px;
 }
 
 element-text {
