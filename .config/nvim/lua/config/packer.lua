@@ -17,32 +17,38 @@ return require("packer").startup(function(use)
         end
     })
 
+    -- treesitter
     use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 
+    -- lsp
     use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        "VonHeikemen/lsp-zero.nvim",
+        branch = "v2.x",
         requires = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+            { "neovim/nvim-lspconfig" },             -- Required
+            { "williamboman/mason.nvim" },           -- Optional
+            { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
-            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' },     -- Required
+            { "hrsh7th/nvim-cmp" },     -- Required
+            { "hrsh7th/cmp-nvim-lsp" }, -- Required
+            { "L3MON4D3/LuaSnip" },     -- Required
         }
     }
 
+    -- colored hex-codes
     use("norcalli/nvim-colorizer.lua")
 
+    -- lualine
     use {
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true }
     }
 
-    use('mfussenegger/nvim-jdtls')
+    -- vimtex
+    use("lervag/vimtex")
 
-    use('lervag/vimtex')
+    -- git diffs
+    use("airblade/vim-gitgutter")
 end)

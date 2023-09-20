@@ -22,3 +22,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+vim.g.tex_flavor = "latex"
+
+vim.opt.clipboard = "unnamed"

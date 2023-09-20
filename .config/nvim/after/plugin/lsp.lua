@@ -10,6 +10,7 @@ lsp.ensure_installed({
     "marksman",
     "clangd",
     "texlab",
+    "ltex"
 })
 
 -- start language servers
@@ -17,6 +18,13 @@ require 'lspconfig'.rust_analyzer.setup {}
 require 'lspconfig'.marksman.setup {}
 require 'lspconfig'.clangd.setup {}
 require'lspconfig'.texlab.setup{}
+require'lspconfig'.ltex.setup{
+    settings = {
+		ltex = {
+			language = "de-de",
+		},
+	}
+}
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
