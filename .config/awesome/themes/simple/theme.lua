@@ -361,7 +361,7 @@ function theme.at_screen_connect(s)
                 { -- Left widgets
                     layout = wibox.layout.fixed.horizontal,
 
-                    createWidget(mpris, mprisIcon, wicolors.spotify, nil, margin, 0),
+                    createWidget(mpris, mprisIcon, wicolors.spotify, nil, 0, 0),
                     -- createWidget(weather.widget, weatherIcon, wicolors.weather, margin, -2),
 
                     createWidget(
